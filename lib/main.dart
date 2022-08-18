@@ -27,62 +27,50 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  List<String> listimage = [];
-  late CarouselSlider instance;
-  
-  String a = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.futura-sciences.com%2Fbuildsv6%2Fimages%2Fwide1920%2F8%2F8%2F6%2F886a1f5f0b_84113_fs-01-13668997695-1b11821209-k.jpg&imgrefurl=https%3A%2F%2Fwww.futura-sciences.com%2Fsante%2Fdossiers%2Fmedecine-bien-etre-sante-nature-1491%2F&tbnid=Id1GpxVCrZreoM&vet=12ahUKEwjh-Ie8t9D5AhWbhc4BHajICdcQMygBegUIARDdAQ..i&docid=u81oVzs3KVzA8M&w=1820&h=1137&q=nature&hl=fr&client=opera-gx&ved=2ahUKEwjh-Ie8t9D5AhWbhc4BHajICdcQMygBegUIARDdAQ";
-  String b = "https://cdn.futura-sciences.com/buildsv6/images/wide1920/d/b/4/db4a1846c7_50188977_homme-nature-sante.jpg";
-  String c = "https://img.passeportsante.net/1200x675/2020-01-30/i93408-.webp";
-  String d = "https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/3/b/d3b819bfbd_50156986_relation-humain-nature.jpg";
-  String e = "data:image/jpeg;base64,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";
-  String f = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgZMJfnxOApAyqc3CWco97S07UEdo5N-GZ6w&usqp=CAU";
-  String g = "https://cdn.unenvironment.org/s3fs-public/styles/topics_content_promo/public/2021-02/seljalandsfoss-1751463_1920.jpg?VersionId=null&itok=LqA8wUBK";
-
-  @override
-  void initState()
- 
-  {
-    super.initState();
-    listimage.add(a);
-    listimage.add(c);
-    listimage.add(d);
-    listimage.add(e);
-    listimage.add(f);
-    listimage.add(g);
+  Widget movies(String name, String image, String movie) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.indigo,
+          foregroundColor: Colors.white,
+          backgroundImage: NetworkImage(image),
+          radius: 30,
+          child: Text(
+            image.isEmpty ? name[0].toUpperCase() : '',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        title: Text(
+          name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        subtitle: Text(
+          movie,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+            color: Colors.purple,
+          ),
+        ),
+      ),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
-    instance = CarouselSlider(
-      items: listimage.map((x){
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          margin: const EdgeInsets.symmetric(horizontal: 5.0 ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.black,
-          ),
-          child: Column(
-            children: [
-              Image.network("$x"),
-            ],
-          ),
-        );
-      }).toList(),
-       options: CarouselOptions(
-         initialPage: 0,
-         enableInfiniteScroll: true,
-         scrollDirection: Axis.horizontal,
-         height: MediaQuery.of(context).size.height-100,
-       ),
-      );
-  
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue,
         title: Text(
-          "Carousel slide",
+          "Circle Avatar",
           style: TextStyle(
             fontSize: 25,
             color: Colors.black,
@@ -92,11 +80,54 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.computer_sharp, color: Colors.black, size: 30),
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
-          instance,
+          movies(
+              "Gasadel Papel",
+              "https://fr.web.img6.acsta.net/pictures/22/01/18/10/13/5983633.jpg",
+              "Un film de Kh"),
+         Divider(height: 10,
+          color: Colors.red,
+          ),
+          movies(
+              "Dee grey",
+              "https://resize2.prod.docfr.doc-media.fr/s/1200/ext/eac4ff34/content/2022/7/5/les-50-films-les-plus-sexy-879c300af67d91ee.jpeg",
+              "Un film de Jean"),
+          const Divider(height: 10, color: Colors.black),
+          movies(
+              "Roma",
+              "https://www.cinetrafic.fr/images/affiches/big/aff_3822020190920060001.jpg",
+              "Un film de Paul"),
+          const Divider(height: 10, color: Colors.black),
+          movies(
+              "RollerBall",
+              "https://www.france.tv/image/vignette_3x4/346/461/i/l/o/f1591cb3-phpzcjoli.jpg",
+              "Un film de Mc"),
+          const Divider(height: 10, color: Colors.black),
+           movies(
+              "Blanche comme neige",
+              "https://www.france.tv/image/vignette_3x4/346/461/1/s/n/606ba75f-phpnzcns1.jpg",
+              "Un film de Mari"),
+         Divider(height: 10,
+          color: Colors.red,
+          ),
+          movies(
+              "La ressurrection",
+              "https://s2.dmcdn.net/v/U8l0L1Y-2nQZlrBEr/x240",
+              "Un film de Jean Paul"),
+          const Divider(height: 10, color: Colors.black),
+          movies(
+              "Le choc des empires",
+              "",
+              "Le choc des empires,un film de Paul"),
+          const Divider(height: 10, color: Colors.black),
+          movies(
+              "335",
+              "https://fr.web.img5.acsta.net/c_310_420/pictures/21/11/26/11/51/2331900.jpg",
+              "Un film d'Anne Mari"),
+          const Divider(height: 10, color: Colors.black),
         ],
-      )
+      ),
     );
   }
 }
