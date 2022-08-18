@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0+1",
+    "configurations": [
+            {
+                    "name": "chat_friendly",
+                    "program": "lib/main.dart",
+                    "request": "launch",
+                    "type": "dart",
+                    "args": [
+                            "--no-sound-null-safety"
+                        ]
+            }
+    ]
+}
