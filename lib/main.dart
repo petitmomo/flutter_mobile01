@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-//import 'package:carousel_pro/carousel_pro.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,42 +26,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget movies(String name, String image, String movie) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.indigo,
-          foregroundColor: Colors.white,
-          backgroundImage: NetworkImage(image),
-          radius: 30,
-          child: Text(
-            image.isEmpty ? name[0].toUpperCase() : '',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
-        title: Text(
-          name,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        subtitle: Text(
-          movie,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 10,
-            color: Colors.purple,
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.blue,
         title: Text(
-          "Circle Avatar",
+          "Staggered Gridview",
           style: TextStyle(
             fontSize: 25,
             color: Colors.black,
@@ -80,54 +43,95 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.computer_sharp, color: Colors.black, size: 30),
         ],
       ),
-      body: ListView(
-        children: [
-          movies(
-              "Gasadel Papel",
-              "https://fr.web.img6.acsta.net/pictures/22/01/18/10/13/5983633.jpg",
-              "Un film de Kh"),
-         Divider(height: 10,
-          color: Colors.red,
-          ),
-          movies(
-              "Dee grey",
-              "https://resize2.prod.docfr.doc-media.fr/s/1200/ext/eac4ff34/content/2022/7/5/les-50-films-les-plus-sexy-879c300af67d91ee.jpeg",
-              "Un film de Jean"),
-          const Divider(height: 10, color: Colors.black),
-          movies(
-              "Roma",
-              "https://www.cinetrafic.fr/images/affiches/big/aff_3822020190920060001.jpg",
-              "Un film de Paul"),
-          const Divider(height: 10, color: Colors.black),
-          movies(
-              "RollerBall",
-              "https://www.france.tv/image/vignette_3x4/346/461/i/l/o/f1591cb3-phpzcjoli.jpg",
-              "Un film de Mc"),
-          const Divider(height: 10, color: Colors.black),
-           movies(
-              "Blanche comme neige",
-              "https://www.france.tv/image/vignette_3x4/346/461/1/s/n/606ba75f-phpnzcns1.jpg",
-              "Un film de Mari"),
-         Divider(height: 10,
-          color: Colors.red,
-          ),
-          movies(
-              "La ressurrection",
-              "https://s2.dmcdn.net/v/U8l0L1Y-2nQZlrBEr/x240",
-              "Un film de Jean Paul"),
-          const Divider(height: 10, color: Colors.black),
-          movies(
-              "Le choc des empires",
-              "",
-              "Le choc des empires,un film de Paul"),
-          const Divider(height: 10, color: Colors.black),
-          movies(
-              "335",
-              "https://fr.web.img5.acsta.net/c_310_420/pictures/21/11/26/11/51/2331900.jpg",
-              "Un film d'Anne Mari"),
-          const Divider(height: 10, color: Colors.black),
-        ],
+      body: Container(
+        margin: const EdgeInsets.all(10),
+        child: MasonryGridView.count(
+          // Axis scrollDirection: Axis.vertical,
+          // bool reverse: false,
+          crossAxisCount: 5,
+          mainAxisSpacing: 5.0,
+          crossAxisSpacing: 5.0,
+          itemCount: infos.length,
+          itemBuilder: (BuildContext context, int index){
+            return ShowInfo(
+              verif: infos[index],
+            );
+          }
+        )
       ),
+      );
+      // Center(pr
+      //   child: Column(
+      //     children: [
+      //       Text("test"),
+      //     ],
+      //   ),
+      // ),
+  }
+}
+
+class Info {
+  String images;
+  String titles;
+  String city;
+
+  Info({required this.images, required this.city, required this.titles});
+}
+
+List<Info> infos = [
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+  Info(
+    images:
+        "https://www.propertieslamangaclub.com/perch/resources/gallery/11lasorquideasaticointerior02-w900.jpg",
+    titles: "Appartement",
+    city: "Saly Carrefour",
+  ),
+];
+
+class ShowInfo extends StatelessWidget {
+  final Info verif;
+
+  const ShowInfo({Key? key, required this.verif}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(verif.images),
+        ),
+        Text(verif.city, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(verif.titles, style: TextStyle(fontWeight: FontWeight.bold)),
+      ],
     );
   }
 }
