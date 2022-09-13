@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 //import 'package:flutter_rating/flutter_rating.dart';
 
@@ -30,45 +29,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int maxstar=5;
-
-  double rating1 = 1;
-  double rating2 = 4;
-  double rating3 = 2;
-  double rating4 = 3;
-
-
-Widget details(String image,String hotel,double rate, Color color){
-  return Container(
-    child: Column(
-      children: [
-        Container(
-          child: Row(children: [
-            Image.network(image, fit: BoxFit.fill, width: 340, height: 300)
-          ],),
-        ),
-                Container(
-          child: Row(children: [
-            Text(hotel, style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 15
-            ),
-            ),
-            // StarRating(
-            //   size: 10,
-            //   color: color,
-            //   borderColor: color,
-            //   rating: rate,
-            //   starCount: maxstar,
-            //   onRatingChanged: (rate){
-
-            //   },
-            // )
-          ],),
-        ),
-      ],
-    ),
-  );
-}
+  String info = "";
+  bool change = true;
+  String a = "images/5.png";
+  String b = "images/7.png";
+  String c = "images/9.png";
+  String d = "images/10.png";
+  void onsubmit(String value){
+    setState(() {
+          info=value;
+        });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +47,7 @@ Widget details(String image,String hotel,double rate, Color color){
         centerTitle: true,
         backgroundColor: Colors.blue,
         title: Text(
-          "SingleChildScrollView 01",
+          "GestureDetector or inkwell",
           style: TextStyle(
             fontSize: 25,
             color: Colors.black,
@@ -86,26 +57,65 @@ Widget details(String image,String hotel,double rate, Color color){
           const Icon(Icons.computer_sharp, color: Colors.black, size: 30)
         ],
       ),
-      body:SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            details("https://media-cdn.tripadvisor.com/media/photo-s/1c/9c/9a/a1/lamantin-beach-resort.jpg","Lamantin Beach",rating1, Colors.blue),
-            details("https://media-cdn.tripadvisor.com/media/photo-s/0b/37/1c/17/piscine.jpg","Saly Hôtel",rating2, Colors.red),
-            details("https://static.service-voyages.com/photos/vacances-senegal/dakar/piscine-framissima-palm-beach_513030_panobd.jpg","Faramissima Palm Beach",rating3, Colors.purple),
-            details("https://www.worldwaterforum.org/sites/default/files/styles/large/public/2021-12/princess_1.jpg?itok=Xzk2FkGZ","Saly princess",rating4, Colors.orange),
-          ],
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Mouvement de la souris : $info',style: TextStyle(
+                color: Colors.blue, fontSize: 22, fontWeight: FontWeight.bold
+              ),
+              ),
+              Row(
+                children: [
+                  Image.asset(change?a:b, width: 170, height: 170),
+                  Image.asset(change?c:d,width: 170, height: 170),
+
+                ],
+              ),
+              GestureDetector(
+                onDoubleTap: (){
+                  if (change=true) {
+                    change=true;
+                    onsubmit("Deux cliques");
+                  } else {
+                    change=false;
+                  }
+                },
+                onTap: (){
+                  if (change=true) {
+                     change=false;
+                     onsubmit("Un clique");
+                  } else {
+                    change=true;
+                  }
+                },
+                onLongPress: (){
+                  onsubmit("Long clique");
+                },
+                onTapCancel: (){
+                  onsubmit("Clique annaulé");
+                },
+                child: Container(
+                  width: 150,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlueAccent,
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                     child: const Text("Validation", style: TextStyle(
+                    color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,
+                  )),
+                  )
+                 
+                ),
+              )
+            ],
+          ),
         ),
-      )
-      //  Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text('test'),
-      //     ],
-      //   ),
-      // ),
+      ),
     );
   }
 }
