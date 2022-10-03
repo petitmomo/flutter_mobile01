@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'components/add_hastags.dart';
 import 'screens/list_view.dart';
 import 'screens/message_view.dart';
 import 'screens/screen_view.dart';
@@ -30,15 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: PageView(
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-          },
-          controller: _pageController,
-          children: const <Widget>[
-            ScreenView(),
-            ListViewAstags(),
-            MessageView(),
-          ]),
+        onPageChanged: (index) {
+          setState(() => _currentIndex = index);
+        },
+        controller: _pageController,
+        children: const <Widget>[
+          ScreenView(),
+          ListViewAstags(),
+          MessageView(),
+        ],
+      ),
+      floatingActionButton: const AddHashtagsComponent(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -54,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.list),
             label: "Hastags",
           ),
-                    const BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.send),
             label: "Message",
           ),
